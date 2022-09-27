@@ -1,0 +1,62 @@
+<section>
+    <p-table #dt1 [value]="employees" dataKey="id" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-customers" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords}
+        entries" [globalFilterFields]="['name','representative.name','status']">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text"
+                        (input)="dt1.filterGlobal($event.target.value,
+                        'contains')"
+                        placeholder="Search keyword" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Id</th>
+                <th>Employee Name</th>
+                <th>Employee Salary</th>
+                <th>Employee Age</th>
+            </tr>
+            <tr>
+                <th>
+                    <p-columnFilter type="text" field="id">id</p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="employee_name">employee_name</p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="employee_salary">employee_salary</p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="employee_age">employee_age</p-columnFilter>
+                </th>
+                <th>
+                    <p-column type="text" field="actions"></p-column>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-employees let-rowIndex="rowIndex">
+            <tr>
+                <td class="text-center ">
+                    {{employees?.id}}
+                </td>
+                <td class="text-center ">
+                    {{employees?.employee_name}}
+                </td>
+                <td class="text-center ">
+                    {{employees?.employee_salary}}
+                </td>
+                <td class="text-center ">
+                    {{employees?.employee_age}}
+                </td>
+                <td class="text-center ">
+                    <i class="pi pi-pencil " (click)="updateEmployee(employees?.id)"></i>
+                    <i class="pi pi-trash " (click)="deleteEmployee(employees.id)
+                        "></i>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</section>
